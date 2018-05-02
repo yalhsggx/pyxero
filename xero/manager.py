@@ -181,7 +181,8 @@ class Manager(object):
                 if not response.headers['content-type'].startswith('application/json'):
                     return response.content
 
-                return self._parse_api_response(response, self.name)
+                resource_name = 'OnlineInvoices' if uri.endswith('/OnlineInvoice') else self.name
+                return self._parse_api_response(response, resource_name)
 
             elif response.status_code == 400:
                 raise XeroBadRequest(response)
